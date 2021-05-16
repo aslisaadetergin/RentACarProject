@@ -10,10 +10,20 @@ namespace ReCapProject
     {
         static void Main(string[] args)
         {
-            CarTest();
+            // CarTest();
 
             // BrandTest();
+             CarDetailDtoTest();
+        }
 
+        private static void CarTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+
+            foreach (var car in carManager.GetAll().Data)
+            {
+                Console.WriteLine(car.CarName);
+            }
         }
 
         private static void BrandTest()
@@ -30,14 +40,25 @@ namespace ReCapProject
             // });
         }
 
-        private static void CarTest()
+        private static void CarDetailDtoTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+
+            if (result.Success == true)
             {
-                Console.WriteLine(car.CarDescription + "/" + car.BrandName);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + "/" + car.BrandName);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
 
 
             //carManager.Add(new Car
@@ -50,5 +71,8 @@ namespace ReCapProject
             //    Description = "2019 model bir araba"
             //});
         }
+
+
+
     }
 }

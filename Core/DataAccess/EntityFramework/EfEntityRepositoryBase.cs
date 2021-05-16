@@ -50,6 +50,14 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
+        //public List<TEntity> GetAll()
+        //{
+        //        using (TContext context = new TContext())
+        //        {
+        //            return context.Set<TEntity>().ToList();
+        //        }
+        //}
+
         public List<TEntity> GetById()
         {
             throw new NotImplementedException();
